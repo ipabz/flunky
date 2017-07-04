@@ -3,8 +3,8 @@ folders:
       to: /home/vagrant/Code
 
 sites:
-    - map: adzbuzz.local
-      to: /home/vagrant/Code/adzbuzz
+    - map: mysite.local
+      to: /home/vagrant/Code/my-site
 
 databases:
-    - adzbuzz
+    - mysite_db
