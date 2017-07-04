@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# Set language
 echo "export LANG=en_PH" >> ~/.bashrc
 echo "export LANG=en_PH" >> /home/vagrant/.bashrc
 
@@ -7,22 +8,17 @@ echo "export LANG=en_PH" >> /home/vagrant/.bashrc
 sudo echo '' > /etc/motd
 
 # Use our own httpd.conf setup
-sudo rm -f /etc/httpd/conf/httpd.conf
-sudo cat /vagrant/stubs/httpd.conf.stub > /etc/httpd/conf/httpd.conf
+bash /vagrant/scripts/setup-apache-config.sh
 
 # Use our own setup of php.ini
-sudo rm -f /etc/php.ini
-sudo cat /vagrant/stubs/php.ini.stub > /etc/php.ini
+bash /vagrant/scripts/setup-php-ini.sh
 
 # Create sites container
-sudo rm -rf /etc/httpd/sites-available
-sudo rm -rf /etc/httpd/sites-enabled
-sudo mkdir /etc/httpd/sites-available
-sudo mkdir /etc/httpd/sites-enabled
+bash /vagrant/scripts/clear-apache.sh
+bash /vagrant/scripts/create-apache-container.sh
 
 # Set mysql config
-sudo cat /vagrant/stubs/my.cnf.stub > /etc/my.cnf
-sudo service mysqld restart
+bash /vagrant/scripts/setup-mysql-config.sh
 
 # Initialize settings
 sudo php /vagrant/flunky_init
