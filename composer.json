@@ -8,10 +8,7 @@
     "autoload": {
         "psr-4": {
             "Flunky\\": "src/Flunky/"
-        },
-        "files": [
-            "src/Flunky/helpers.php"
-        ]
+        }
     },
     "authors": [
         {

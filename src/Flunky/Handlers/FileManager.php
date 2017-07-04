@@ -1,6 +1,6 @@
 <?php
 
-namespace Flunky\Creators;
+namespace Flunky\Handlers;
 
 use League\Flysystem\Filesystem;
 use Symfony\Component\Yaml\Yaml;

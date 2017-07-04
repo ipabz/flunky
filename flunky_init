@@ -1,4 +1,7 @@
 #!/usr/bin/env php
 <?php
 
-require ("src/Flunky/boot.php");
+require("vendor/autoload.php");
+
+$flunky = new Flunky\Flunky(dirname(__FILE__) . '/');
+$flunky->start();

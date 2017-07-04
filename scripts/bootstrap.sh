@@ -21,10 +21,8 @@ sudo mkdir /etc/httpd/sites-available
 sudo mkdir /etc/httpd/sites-enabled
 
 # Set mysql config
-sudo rm -f /etc/my.cnf
-sudo cp /vagrant/stubs/my.cnf /etc/my.cnf
+sudo cat /vagrant/stubs/my.cnf.stub > /etc/my.cnf
 sudo service mysqld restart
-
 
 # Initialize settings
 sudo php /vagrant/flunky_init

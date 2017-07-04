@@ -2,13 +2,13 @@
 
 namespace Flunky;
 
+use Flunky\Handlers\Mysql;
+use Flunky\Handlers\Linker;
 use Symfony\Component\Yaml\Yaml;
-use Flunky\Creators\Mysql;
-use Flunky\Creators\Linker;
-use Flunky\Creators\VirtualHost;
+use Flunky\Handlers\VirtualHost;
 use Symfony\Component\Yaml\Exception\ParseException;
 
-class App
+class Flunky
 {
     /**
      * @var string
@@ -26,17 +26,17 @@ class App
     protected $config;
 
     /**
-     * @var Flunky\Creators\Linker
+     * @var Flunky\Handlers\Linker
      */
     protected $linker;
 
     /**
-     * @var Flunky\Creators\VirtualHost
+     * @var Flunky\Handlers\VirtualHost
      */
     protected $virtualHost;
 
     /**
-     * @var Flunky\Creators\Mysql
+     * @var Flunky\Handlers\Mysql
      */
     protected $mysql;
 
