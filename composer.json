@@ -1,0 +1,22 @@
+{
+    "name": "icpabelona/flunky",
+    "require": {
+        "league/flysystem": "^1.0",
+        "symfony/yaml": "^3.3",
+        "tightenco/collect": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Flunky\\": "src/Flunky/"
+        },
+        "files": [
+            "src/Flunky/helpers.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Ivan Clint A. Pabelona",
+            "email": "ipabelona@gmail.com"
+        }
+    ]
+}
