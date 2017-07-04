@@ -1,3 +1,7 @@
+ip: "192.168.33.10"
+memory: 2048
+cpus: 1
+
 folders:
     - map: ~/Desktop/Projects
       to: /home/vagrant/Code
