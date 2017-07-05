@@ -53,7 +53,7 @@ class VirtualHost extends FileManager
     protected function getFolderMapping($to, $mappings)
     {
         foreach ($mappings as $map) {
-            if (strpos($to, $map)) {
+            if (strpos("$to", "$map") !== false) {
                 return $map;
             }
         }
