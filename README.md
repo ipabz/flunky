@@ -1,3 +1,28 @@
+# Flunky
+
+A simple and easy to use local development environment. It makes use of Vagrant which provides an elegant way to manage Virtual Machines.
+
+## Softwares Included
+
+- CentOS 7
+- Git
+- PHP 5.6(remi repository)
+- HHVM(3.9)
+- Apache(2.4.6)
+- Nginx(1.8)
+- MySQL(5.6)
+- Sqlite3
+- PostgreSQL(9.4)
+- Composer
+- Node.js (With Grunt, and Gulp)
+- Redis
+- Memcached
+- Elasticsearch
+- MongoDB
+- Java(1.8)
+- fluentd
+- Couchbase
+
 ## Installation & Setup
 
 ### Prerequisites
