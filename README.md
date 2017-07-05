@@ -58,3 +58,22 @@ Make sure the IP address listed is the one set in your `~/Flunky/Flunky.yaml` fi
 http://my-project.dev
 ```
 
+## Launching The Vagrant Box
+
+Once you have edited the `Flunky.yaml` to your liking, run the `vagrant up` command from your `Flunky` directory. Vagrant will boot the virtual machine and automatically configure your shared folders and Apache sites.
+
+To destroy the machine, you may use the `vagrant destroy --force` command.
+
+## Daily Usage
+
+### Accessing Flunky Globally
+
+Sometimes you may want to `vagrant up` your Flunky machine from anywhere on your filesystem. You can do this by adding a simple Bash function to your Bash profile. This function will allow you to run any Vagrant command from anywhere on your system and will automatically point that command to your Homestead installation:
+
+```
+function flunky() {
+    ( cd ~/Flunky && vagrant $* )
+}
+```
+
+Make sure to tweak the `~/Flunky` path in the function to the location of your actual Flunky installation. Once the function is installed, you may run commands like `flunky up` or  `flunky ssh` from anywhere on your system.
