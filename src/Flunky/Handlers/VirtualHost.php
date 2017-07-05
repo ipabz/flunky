@@ -46,6 +46,22 @@ class VirtualHost extends FileManager
     }
 
     /**
+     * @param  string $to       
+     * @param  array $mappings
+     * @return mixed
+     */
+    protected function getFolderMapping($to, $mappings)
+    {
+        foreach ($mappings as $map) {
+            if (strpos($to, $map)) {
+                return $map;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Generate VirtualHosts
      * 
      * @return void
@@ -59,7 +75,9 @@ class VirtualHost extends FileManager
             $map = $site['map'];
             $to = $site['to'];
 
-            $prepContents = $this->prepareContent($contents, $map, $to, $toMappings);
+            $mapping = $this->getFolderMapping($to, $toMappings);
+
+            $prepContents = $this->prepareContent($contents, $map, $to, $mapping);
             $this->createVirtualHost($prepContents, $map);
         });
     }
@@ -77,10 +95,10 @@ class VirtualHost extends FileManager
     {
         $toTemp = explode('/', $to);
         $folderMappingsTemp = explode('/', $folderMappings);
-        
+
         $path = $folderMappingsTemp[count($folderMappingsTemp)-1] 
             . '/' . $toTemp[count($toTemp)-2] 
-            . '/' . $toTemp[count($toTemp)-1]
+            . '/' . $toTemp[count($toTemp)-1];
 
         $publicHmtl = '/var/www/html/' . $path;
 
