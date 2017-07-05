@@ -1,14 +1,14 @@
 ip: "192.168.33.10"
-memory: 2048
+memory: 1024
 cpus: 1
 
 folders:
-    - map: ~/Desktop/Projects
-      to: /home/vagrant/Code
+    - map: ~/Projects
+      to: /home/vagrant/Projects
 
 sites:
     - map: mysite.local
-      to: /home/vagrant/Code/my-site
+      to: /home/vagrant/Projects/my-site
 
 databases:
     - mysite_db
