@@ -1,5 +1,5 @@
 <VirtualHost *:80>
-    ServerAdmin ipabelona@gmail.com
+    ServerAdmin webmaster@flunky
     ServerName coolexample.com
     ServerAlias www.coolexample.com 
     DocumentRoot /var/www/coolexample.com/public_html 

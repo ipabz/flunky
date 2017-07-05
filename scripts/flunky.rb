@@ -5,6 +5,12 @@ class Flunky
         config.vm.box = settings["box"] ||= "icpabelona/flunky"
         config.vm.hostname = settings["hostname"] ||= "flunky"
 
+        # Set scripts base path
+        scriptDir = File.dirname(__FILE__)
+
+        # Use default language unless overriden
+        language = settings["lang"] ||= "en_PH"
+
         # Configure A Private Network IP
         config.vm.network :private_network, ip: settings["ip"] ||= "192.168.33.10"
 
@@ -46,11 +52,57 @@ class Flunky
             end
         end
 
-        # Register Shared Folders
+        # Register Shared Folder Container
         config.vm.synced_folder "~", "/vagrant_data"
 
-        # Run additional customizations for vagrant box
-        config.vm.provision :shell, :path => "scripts/bootstrap.sh"
+        # Set locale
+        config.vm.provision "shell" do |s|
+            s.name = "Setting locale: " + language
+            s.path = scriptDir + "/localize.sh"
+            s.args = [language]
+        end
+
+        # Set apache config
+        config.vm.provision "shell" do |s|
+            s.name = "Setting apache config..."
+            s.path = scriptDir + "/setup-apache-config.sh"
+        end
+
+        # Set php.ini
+        config.vm.provision "shell" do |s|
+            s.name = "Setting php.ini..." 
+            s.path = scriptDir + "/setup-php-ini.sh"
+        end
+
+        # Clear apache
+        config.vm.provision "shell" do |s|
+            s.name = "Clearing existing apache container..." 
+            s.path = scriptDir + "/clear-apache.sh"
+        end
+
+        # Create apache container
+        config.vm.provision "shell" do |s|
+            s.name = "Creating apache container..." 
+            s.path = scriptDir + "/create-apache-container.sh"
+        end
+
+        # Set mysql config
+        config.vm.provision "shell" do |s|
+            s.name = "Setting mysql config..." 
+            s.path = scriptDir + "/setup-mysql-config.sh"
+        end
+
+        # Run flunky
+        config.vm.provision "shell" do |s|
+            s.name = "Running flunky..." 
+            s.path = scriptDir + "/flunky.sh"
+        end
+
+        # Start apache
+        config.vm.provision "shell" do |s|
+            s.name = "Starting apache..." 
+            s.path = scriptDir + "/start-apache.sh"
+        end
 
     end
 end
