@@ -52,7 +52,7 @@ class Flunky
 
         $this->linker = new Linker($this->basePath, $this->config['folders']);
 
-        $this->virtualHost = new VirtualHost($this->basePath, $this->config['sites']);
+        $this->virtualHost = new VirtualHost($this->basePath, $this->config);
 
         $this->mysql = new Mysql($this->basePath, $this->config['databases']);
     }
