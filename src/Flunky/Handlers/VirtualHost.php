@@ -12,16 +12,37 @@ class VirtualHost extends FileManager
     protected $sites;
 
     /**
-     * @param string $basePath 
-     * @param array $sites
+     * @var array
      */
-    public function __construct($basePath, $sites)
+    protected $folders;
+
+    /**
+     * @param string $basePath 
+     * @param array $config
+     */
+    public function __construct($basePath, $config)
     {
         parent::__construct($basePath);
 
-        $this->sites = collect($sites);
+        $this->sites = collect($config['sites']);
+
+        $this->folders = $config['folders'];
 
         $this->command = new Command($basePath);
+    }
+
+    /**
+     * @return array
+     */
+    protected function flattenFoldersToValue()
+    {
+        $result = [];
+
+        foreach ($this->folders as $folder) {
+            $result[] = $folder['to'];
+        }
+
+        return $result;
     }
 
     /**
@@ -32,12 +53,13 @@ class VirtualHost extends FileManager
     public function generateVirtualHosts()
     {
         $contents = $this->read('stubs/virtualhost.stub');
+        $toMappings = $this->flattenFoldersToValue();
         
-        $this->sites->each(function ($site) use ($contents) {
+        $this->sites->each(function ($site) use ($contents, $toMappings) {
             $map = $site['map'];
             $to = $site['to'];
 
-            $prepContents = $this->prepareContent($contents, $map, $to);
+            $prepContents = $this->prepareContent($contents, $map, $to, $toMappings);
             $this->createVirtualHost($prepContents, $map);
         });
     }
@@ -47,13 +69,20 @@ class VirtualHost extends FileManager
      * 
      * @param  string $contents
      * @param  string $map
-     * @param  string $to   
+     * @param  string $to  
+     * @param  array $folderMappings  
      * @return string
      */
-    protected function prepareContent($contents, $map, $to)
+    protected function prepareContent($contents, $map, $to, $folderMappings)
     {
-        $temp = explode('/', $to);
-        $publicHmtl = '/var/www/html/' . $temp[count($temp)-2] . '/' . $temp[count($temp)-1];
+        $toTemp = explode('/', $to);
+        $folderMappingsTemp = explode('/', $folderMappings);
+        
+        $path = $folderMappingsTemp[count($folderMappingsTemp)-1] 
+            . '/' . $toTemp[count($toTemp)-2] 
+            . '/' . $toTemp[count($toTemp)-1]
+
+        $publicHmtl = '/var/www/html/' . $path;
 
         $data = [
             'ServerName coolexample.com'                               => 'ServerName ' . $map,
