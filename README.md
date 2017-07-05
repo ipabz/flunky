@@ -44,3 +44,17 @@ sites:
 
 If you change the `sites` property after provisioning the Flunky box, you should re-run  `vagrant reload --provision` to update the Apache configuration on the virtual machine.
 
+### The Hosts File
+
+You must add the "domains" for your Apache sites to the `hosts` file on your machine. The hosts file will redirect requests for your Flunky sites into your Flunky machine. On Mac and Linux, this file is located at `/etc/hosts`. On Windows, it is located at  `C:\Windows\System32\drivers\etc\hosts`. The lines you add to this file will look like the following:
+
+```
+192.168.33.10  my-project.dev
+```
+
+Make sure the IP address listed is the one set in your `~/Flunky/Flunky.yaml` file. Once you have added the domain to your `hosts` file and launched the Vagrant box you will be able to access the site via your web browser:
+
+```
+http://my-project.dev
+```
+
