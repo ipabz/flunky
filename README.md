@@ -1,8 +1,8 @@
-# Prerequisite
+### Prerequisite
 
-You must have <a target="_blank" href="https://www.virtualbox.org">virtualbox</a> and <a target="_blank" href="https://vagrantup.com">vagrant</a> installed before proceeding below.
+Before launching your Flunky environment, you must install <a target="_blank" href="https://www.virtualbox.org">VirtualBox</a> and <a target="_blank" href="https://vagrantup.com">Vagrant</a>. These software packages provide easy-to-use visual installers for all popular operating systems.
 
-# Installation
+### Installation
 
 1) ```cd ~ && git clone https://github.com/ipabz/flunky.git Flunky && cd ~/Flunky```
 
