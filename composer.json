@@ -10,6 +10,14 @@
             "Flunky\\": "src/Flunky/"
         }
     },
+    "scripts": {
+        "post-install-cmd": [
+            "bash scripts/init.sh"
+        ],
+        "post-update-cmd": [
+            "bash scripts/init.sh"
+        ]
+    },
     "authors": [
         {
             "name": "Ivan Clint A. Pabelona",

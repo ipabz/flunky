@@ -1,6 +1,6 @@
 # Flunky
 
-A simple and easy to use local development environment. It makes use of Vagrant which provides an elegant way to manage Virtual Machines.
+A simple and easy to use local development environment. It makes use of <a target="_blank" href="https://vagrantup.com">Vagrant</a> which provides an elegant way to manage Virtual Machines.
 
 ## Softwares Included
 
@@ -27,7 +27,7 @@ A simple and easy to use local development environment. It makes use of Vagrant 
 
 ### Prerequisites
 
-Before launching your Flunky environment, you must install <a target="_blank" href="https://www.virtualbox.org">VirtualBox</a> and <a target="_blank" href="https://vagrantup.com">Vagrant</a>. These software packages provide easy-to-use visual installers for all popular operating systems.
+Before launching your Flunky environment, you must install <a target="_blank" href="https://www.virtualbox.org">VirtualBox</a> and <a target="_blank" href="https://vagrantup.com">Vagrant</a>. These software packages provide easy-to-use visual installers for all popular operating systems. You also need to have <a href="https://getcomposer.org/" target="_blank">composer</a> installed on your system.
 
 ### Installing Flunky
 
@@ -39,10 +39,10 @@ cd ~
 git clone https://github.com/ipabz/flunky.git Flunky
 ```
 
-Once you have cloned the Flunky repository, run the `bash scripts/init.sh` command from the Flunky directory to create the `Flunky.yaml` configuration file. The `Flunky.yaml` file will be placed in the `~/Flunky` directory:
+Once you have cloned the Flunky repository, run the `composer install` command from the Flunky directory to create the `Flunky.yaml` configuration file. The `Flunky.yaml` file will be placed in the `~/Flunky` directory:
 
 ```
-bash scripts/init.sh
+composer install
 ```
 
 ## Configuring Flunky
