@@ -4,7 +4,7 @@ namespace Flunky\Handlers;
 
 use Flunky\Console\Command;
 
-class VirtualHost extends FileManager
+class VirtualHost extends Handler
 {
     /**
      * @var array

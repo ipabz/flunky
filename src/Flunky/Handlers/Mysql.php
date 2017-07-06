@@ -4,7 +4,7 @@ namespace Flunky\Handlers;
 
 use Flunky\Console\Command;
 
-class Mysql
+class Mysql extends Handler
 {
     /**
      * @var string

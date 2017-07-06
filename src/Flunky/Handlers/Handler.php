@@ -8,7 +8,7 @@ use League\Flysystem\MountManager;
 use League\Flysystem\Adapter\Local;
 use Flunky\Exceptions\FileNotFoundException;
 
-abstract class FileManager
+abstract class Handler
 {
     /**
      * @var string

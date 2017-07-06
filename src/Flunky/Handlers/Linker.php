@@ -4,7 +4,7 @@ namespace Flunky\Handlers;
 
 use Flunky\Console\Command;
 
-class Linker extends FileManager
+class Linker extends Handler
 {
     /**
      * @var array
