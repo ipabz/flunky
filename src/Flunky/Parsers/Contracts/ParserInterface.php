@@ -13,4 +13,11 @@ interface ParserInterface
      * @return array
      */
     public function parse(FileInterface $file);
+
+    /**
+     * Get file extension of the files it can handle
+     * 
+     * @return string
+     */
+    public function getHandledExtension();
 }

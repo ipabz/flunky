@@ -18,4 +18,14 @@ class YamlParser implements ParserInterface
     {
         return Yaml::parse($file->getContents());
     }
+
+    /**
+     * Get file extension of the files it can handle
+     * 
+     * @return string
+     */
+    public function getHandledExtension()
+    {
+        return 'yaml';
+    }
 }

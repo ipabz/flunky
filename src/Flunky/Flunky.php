@@ -3,10 +3,7 @@
 namespace Flunky;
 
 use Flunky\Files\File;
-use Flunky\Handlers\Mysql;
-use Flunky\Handlers\Linker;
-use Flunky\Parsers\YamlParser;
-use Flunky\Handlers\VirtualHost;
+use Flunky\Files\FileManager;
 use Flunky\Files\Contracts\FileInterface;
 use Flunky\Parsers\Contracts\ParserInterface;
 
@@ -15,23 +12,17 @@ class Flunky
     /**
      * @var array
      */
-    protected $parsers = [
-        'yaml' => YamlParser::class
-    ];
+    protected $parsers;
 
     /**
      * @var array
      */
-    protected $handlers = [
-        Linker::class,
-        VirtualHost::class,
-        Mysql::class
-    ];
+    protected $handlers;
 
     /**
      * @var array
      */
-    protected $processes = [];
+    protected $processes;
 
     /**
      * @param string $basePath
@@ -39,6 +30,8 @@ class Flunky
     public function __construct($basePath)
     {
         $configFile = new File($basePath . 'Flunky.yaml');
+
+        $this->autoDiscover($basePath);
 
         $config = $this->getConfig($configFile, $this->getParser($configFile));
 
@@ -94,5 +87,59 @@ class Flunky
     protected function getConfig(FileInterface $file, ParserInterface $parser)
     {
         return $parser->parse($file);
+    }
+
+    /**
+     * Auto discovery of parsers and handlers
+     * 
+     * @param  string $path
+     * @return void
+     */
+    protected function autoDiscover($path)
+    {
+        $this->loadParsers($path . 'src/Flunky/Parsers');
+
+        $this->loadHandlers($path . 'src/Flunky/Handlers');
+    }
+
+    /**
+     * Load parsers
+     * 
+     * @param  string $path 
+     * @return void
+     */
+    protected function loadParsers($path)
+    {
+        $fileManager = new FileManager($path);
+
+        $this->parsers = $fileManager->listPhpFiles()->mapWithKeys(function($file) {
+            $file = str_replace('.php', '', $file);
+            $class = "\\Flunky\\Parsers\\$file";
+
+            return [(new $class)->getHandledExtension() => $class];
+        })->toArray();
+    }
+
+    /**
+     * Load handlers
+     * 
+     * @param  string $path 
+     * @return void
+     */
+    protected function loadHandlers($path)
+    {
+        $fileManager = new FileManager($path);
+
+        $this->handlers = $fileManager->listPhpFiles()
+            ->reject(function($file) {
+                return $file === 'Handler.php';
+            })
+            ->map(function($file) {
+                $file = str_replace('.php', '', $file);
+                $class = "\\Flunky\\Handlers\\$file";
+
+                return $class;
+            })
+            ->toArray();
     }
 }
