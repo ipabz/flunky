@@ -97,8 +97,7 @@ class VirtualHost extends FileManager
         $folderMappingsTemp = explode('/', $folderMappings);
 
         $path = $folderMappingsTemp[count($folderMappingsTemp)-1] 
-            . '/' . $toTemp[count($toTemp)-2] 
-            . '/' . $toTemp[count($toTemp)-1];
+            . str_replace($folderMappings, '', $to);
 
         $publicHmtl = '/var/www/html/' . $path;
 
