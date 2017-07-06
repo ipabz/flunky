@@ -112,12 +112,14 @@ class Flunky
     {
         $fileManager = new FileManager($path);
 
-        $this->parsers = $fileManager->listPhpFiles()->mapWithKeys(function($file) {
-            $file = str_replace('.php', '', $file);
-            $class = "\\Flunky\\Parsers\\$file";
+        $this->parsers = $fileManager->listPhpFiles()
+            ->mapWithKeys(function($file) {
+                $file = str_replace('.php', '', $file);
+                $class = "\\Flunky\\Parsers\\$file";
 
-            return [(new $class)->getHandledExtension() => $class];
-        })->toArray();
+                return [(new $class)->getHandledExtension() => $class];
+            })
+            ->toArray();
     }
 
     /**
