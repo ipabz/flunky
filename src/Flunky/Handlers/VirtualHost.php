@@ -66,7 +66,7 @@ class VirtualHost extends FileManager
      * 
      * @return void
      */
-    public function generateVirtualHosts()
+    public function run()
     {
         $contents = $this->read('stubs/virtualhost.stub');
         $toMappings = $this->flattenFoldersToValue();

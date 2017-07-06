@@ -2,88 +2,97 @@
 
 namespace Flunky;
 
+use Flunky\Files\File;
 use Flunky\Handlers\Mysql;
 use Flunky\Handlers\Linker;
-use Symfony\Component\Yaml\Yaml;
+use Flunky\Parsers\YamlParser;
 use Flunky\Handlers\VirtualHost;
-use Symfony\Component\Yaml\Exception\ParseException;
+use Flunky\Files\Contracts\FileInterface;
+use Flunky\Parsers\Contracts\ParserInterface;
 
 class Flunky
 {
     /**
-     * @var string
+     * @var array
      */
-    protected $basePath;
-
-    /**
-     * @var string
-     */
-    protected $configYamlPath;
+    protected $parsers = [
+        'yaml' => YamlParser::class
+    ];
 
     /**
      * @var array
      */
-    protected $config;
+    protected $handlers = [
+        Linker::class,
+        VirtualHost::class,
+        Mysql::class
+    ];
 
     /**
-     * @var Flunky\Handlers\Linker
+     * @var array
      */
-    protected $linker;
-
-    /**
-     * @var Flunky\Handlers\VirtualHost
-     */
-    protected $virtualHost;
-
-    /**
-     * @var Flunky\Handlers\Mysql
-     */
-    protected $mysql;
+    protected $processes = [];
 
     /**
      * @param string $basePath
      */
     public function __construct($basePath)
     {
-        $this->configYamlPath = $basePath . 'Flunky.yaml';
-        $this->basePath = $basePath;
+        $configFile = new File($basePath . 'Flunky.yaml');
 
-        $this->config = $this->parseConfig();
+        $config = $this->getConfig($configFile, $this->getParser($configFile));
 
-        $this->linker = new Linker($this->basePath, $this->config['folders']);
-
-        $this->virtualHost = new VirtualHost($this->basePath, $this->config);
-
-        $this->mysql = new Mysql($this->basePath, $this->config['databases']);
+        $this->setProcesses($basePath, $config);
     }
 
     /**
      * Do it's job
-     * 
+     *
      * @return void
      */
     public function start()
     {
-        $this->linker->linkDirectories();
-
-        $this->virtualHost->generateVirtualHosts();
-
-        $this->mysql->createDatabase();
+        foreach ($this->processes as $process) {
+            $process->run();
+        }
     }
 
     /**
-     * Parse config file
+     * Set processes
      * 
+     * @param string $basePath
+     * @param string $config   
+     * @return void
+     */
+    protected function setProcesses($basePath, $config)
+    {
+        foreach ($this->handlers as $handler) {
+            $this->processes[] = new $handler($basePath, $config);
+        }
+    }
+
+    /**
+     * Get parser
+     * 
+     * @param  FileInterface $file 
+     * @return ParserInterface
+     */
+    protected function getParser(FileInterface $file)
+    {
+        $parser = $this->parsers[$file->extension()];
+
+        return new $parser;
+    }
+
+    /**
+     * Get config
+     * 
+     * @param  FileInterface   $file   
+     * @param  ParserInterface $parser 
      * @return array
      */
-    protected function parseConfig()
+    protected function getConfig(FileInterface $file, ParserInterface $parser)
     {
-        try {
-            $config = Yaml::parse(file_get_contents($this->configYamlPath));
-        } catch (ParseException $e) {
-            echo "Unable to parse the YAML string: " . $e->getMessage();
-        }
-
-        return $config;
+        return $parser->parse($file);
     }
 }

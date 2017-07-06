@@ -20,11 +20,11 @@ class Linker extends FileManager
      * @param string $basePath 
      * @param array $folders
      */
-    public function __construct($basePath, $folders)
+    public function __construct($basePath, $config)
     {
         parent::__construct($basePath);
 
-        $this->folders = collect($folders);
+        $this->folders = collect($config['folders']);
 
         $this->command = new Command($basePath);
     }
@@ -34,7 +34,7 @@ class Linker extends FileManager
      * 
      * @return void
      */
-    public function linkDirectories()
+    public function run()
     {
         $this->folders->each(function($folder) {
             $fromLocation = str_replace('~', '/vagrant_data', $folder['map']);

@@ -20,9 +20,9 @@ class Mysql
      * @param string $basePath
      * @param array $sites
      */
-    public function __construct($basePath, $databases)
+    public function __construct($basePath, $config)
     {
-        $this->databases = collect($databases);
+        $this->databases = collect($config['databases']);
 
         $this->command = new Command($basePath);
     }
@@ -32,7 +32,7 @@ class Mysql
      * 
      * @return void
      */
-    public function createDatabase()
+    public function run()
     {
         $this->databases->each(function($database) {
             $command = "bash /vagrant/scripts/create-mysql.sh $database";
