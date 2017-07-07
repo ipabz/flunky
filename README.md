@@ -1,6 +1,6 @@
 # Flunky
 
-[![Build Status](https://travis-ci.org/ipabz/flunky.svg?branch=master)](https://travis-ci.org/ipabz/flunky)
+[![Build Status](https://travis-ci.org/ipabz/flunky.svg?branch=develop)](https://travis-ci.org/ipabz/flunky)
 
 A simple and easy to use local development environment. It makes use of <a target="_blank" href="https://vagrantup.com">Vagrant</a> which provides an elegant way to manage Virtual Machines.
 
