@@ -26,9 +26,12 @@ class Command
 
     /**
      * Run a command
-     * 
-     * @param  string $cmd 
-     * @return Flunky\Console\Command
+     *
+     * @param  string $cmd
+     *
+     * @return \Flunky\Console\Command
+     *
+     * @throws CommandException
      */
     public function run($cmd)
     {
@@ -45,38 +48,42 @@ class Command
 
     /**
      * Run cli command and return the output as array
-     * 
-     * @param  string $cmd    
-     * @param  mixed $filter 
+     *
+     * @param  string $cmd
+     * @param  mixed $filter
+     *
      * @return array
      */
-    public function extract($cmd, $filter=null)
+    public function extract($cmd, $filter = null)
     {
         return $this->extractFromCommand($cmd, $filter);
     }
 
     /**
      * Extract cli command out to array
-     * 
-     * @param  string $cmd    
-     * @param  mixed $filter 
+     *
+     * @param  string $cmd
+     * @param  mixed $filter
+     *
      * @return array
+     *
+     * @throws CommandException
      */
     protected function extractFromCommand($cmd, $filter = null)
     {
-        $output = array();
+        $output   = [];
         $exitCode = null;
 
         $this->begin();
         exec("$cmd", $output, $exitCode);
         $this->end();
 
-        if ($exitCode !== 0 || !is_array($output)) {
+        if ($exitCode !== 0 || ! is_array($output)) {
             throw new CommandException("Command $cmd failed.");
         }
 
         if ($filter !== null) {
-            $newArray = array();
+            $newArray = [];
 
             foreach ($output as $line) {
                 $value = $filter($line);
@@ -91,7 +98,7 @@ class Command
             $output = $newArray;
         }
 
-        if (!isset($output[0])) {
+        if (! isset($output[0])) {
             return null;
         }
 
@@ -99,7 +106,7 @@ class Command
     }
 
     /**
-     * @return Flunky\Console\Command
+     * @return \Flunky\Console\Command
      */
     protected function begin()
     {
@@ -110,9 +117,9 @@ class Command
 
         return $this;
     }
-    
+
     /**
-     * @return Flunky\Console\Command
+     * @return \Flunky\Console\Command
      */
     protected function end()
     {
@@ -124,11 +131,12 @@ class Command
 
         return $this;
     }
-    
+
     /**
      * Prepare command
-     * 
-     * @param  array  $args 
+     *
+     * @param  array $args
+     *
      * @return string
      */
     protected static function prepareCommand(array $args)
@@ -146,8 +154,9 @@ class Command
 
     /**
      * Prepager command
-     * 
-     * @param  mixed $arg 
+     *
+     * @param  mixed $arg
+     *
      * @return array
      */
     protected function prepare($arg)
@@ -156,7 +165,7 @@ class Command
             return $this->extractCommandFromArray($arg);
         }
 
-        if (is_scalar($arg) && !is_bool($arg)) {
+        if (is_scalar($arg) && ! is_bool($arg)) {
             return escapeshellarg($arg);
         }
 
@@ -165,8 +174,9 @@ class Command
 
     /**
      * Extract command from array
-     * 
-     * @param  array  $args 
+     *
+     * @param  array $args
+     *
      * @return array
      */
     protected function extractCommandFromArray(array $args)

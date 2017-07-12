@@ -17,7 +17,7 @@ class VirtualHost extends Handler
     protected $folders;
 
     /**
-     * @param string $basePath 
+     * @param string $basePath
      * @param array $config
      */
     public function __construct($basePath, $config)
@@ -46,8 +46,9 @@ class VirtualHost extends Handler
     }
 
     /**
-     * @param  string $to       
+     * @param  string $to
      * @param  array $mappings
+     *
      * @return mixed
      */
     protected function getFolderMapping($to, $mappings)
@@ -63,17 +64,17 @@ class VirtualHost extends Handler
 
     /**
      * Generate VirtualHosts
-     * 
+     *
      * @return void
      */
     public function run()
     {
-        $contents = $this->read('stubs/virtualhost.stub');
+        $contents   = $this->read('stubs/virtualhost.stub');
         $toMappings = $this->flattenFoldersToValue();
-        
+
         $this->sites->each(function ($site) use ($contents, $toMappings) {
             $map = $site['map'];
-            $to = $site['to'];
+            $to  = $site['to'];
 
             $mapping = $this->getFolderMapping($to, $toMappings);
 
@@ -84,20 +85,21 @@ class VirtualHost extends Handler
 
     /**
      * Prepare Content
-     * 
+     *
      * @param  string $contents
      * @param  string $map
-     * @param  string $to  
-     * @param  array $folderMappings  
+     * @param  string $to
+     * @param  array $folderMappings
+     *
      * @return string
      */
     protected function prepareContent($contents, $map, $to, $folderMappings)
     {
-        $toTemp = explode('/', $to);
+        $toTemp             = explode('/', $to);
         $folderMappingsTemp = explode('/', $folderMappings);
 
-        $path = $folderMappingsTemp[count($folderMappingsTemp)-1] 
-            . str_replace($folderMappings, '', $to);
+        $path = $folderMappingsTemp[count($folderMappingsTemp) - 1]
+                . str_replace($folderMappings, '', $to);
 
         $publicHmtl = '/var/www/html/' . $path;
 
@@ -118,15 +120,16 @@ class VirtualHost extends Handler
 
     /**
      * Create a VirtualHost
-     * 
-     * @param  string $contents 
+     *
+     * @param  string $contents
      * @param  string $map
+     *
      * @return void
      */
     protected function createVirtualHost($contents, $map)
     {
         $siteAvailable = '/etc/httpd/sites-available/' . $map . '.conf';
-        $siteEnabled = '/etc/httpd/sites-enabled/' . $map . '.conf';
+        $siteEnabled   = '/etc/httpd/sites-enabled/' . $map . '.conf';
 
         $this->command->run("sudo echo '$contents' > $siteAvailable");
         $this->command->run("sudo ln -s $siteAvailable $siteEnabled");

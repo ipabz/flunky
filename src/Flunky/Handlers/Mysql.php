@@ -29,12 +29,12 @@ class Mysql extends Handler
 
     /**
      * Create database
-     * 
+     *
      * @return void
      */
     public function run()
     {
-        $this->databases->each(function($database) {
+        $this->databases->each(function ($database) {
             $command = "bash /vagrant/scripts/create-mysql.sh $database";
             $this->command->run($command);
         });

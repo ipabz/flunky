@@ -52,9 +52,10 @@ class Flunky
 
     /**
      * Set processes
-     * 
+     *
      * @param string $basePath
-     * @param string $config   
+     * @param string $config
+     *
      * @return void
      */
     protected function setProcesses($basePath, $config)
@@ -66,8 +67,9 @@ class Flunky
 
     /**
      * Get parser
-     * 
-     * @param  FileInterface $file 
+     *
+     * @param  FileInterface $file
+     *
      * @return ParserInterface
      */
     protected function getParser(FileInterface $file)
@@ -79,9 +81,10 @@ class Flunky
 
     /**
      * Get config
-     * 
-     * @param  FileInterface   $file   
-     * @param  ParserInterface $parser 
+     *
+     * @param  FileInterface $file
+     * @param  ParserInterface $parser
+     *
      * @return array
      */
     protected function getConfig(FileInterface $file, ParserInterface $parser)
@@ -91,8 +94,9 @@ class Flunky
 
     /**
      * Auto discovery of parsers and handlers
-     * 
+     *
      * @param  string $path
+     *
      * @return void
      */
     protected function autoDiscover($path)
@@ -104,8 +108,9 @@ class Flunky
 
     /**
      * Load parsers
-     * 
-     * @param  string $path 
+     *
+     * @param  string $path
+     *
      * @return void
      */
     protected function loadParsers($path)
@@ -113,19 +118,20 @@ class Flunky
         $fileManager = new FileManager($path);
 
         $this->parsers = $fileManager->listPhpFiles()
-            ->mapWithKeys(function($file) {
-                $file = str_replace('.php', '', $file);
-                $class = "\\Flunky\\Parsers\\$file";
+                                     ->mapWithKeys(function ($file) {
+                                         $file  = str_replace('.php', '', $file);
+                                         $class = "\\Flunky\\Parsers\\$file";
 
-                return [(new $class)->getHandledExtension() => $class];
-            })
-            ->toArray();
+                                         return [(new $class)->getHandledExtension() => $class];
+                                     })
+                                     ->toArray();
     }
 
     /**
      * Load handlers
-     * 
-     * @param  string $path 
+     *
+     * @param  string $path
+     *
      * @return void
      */
     protected function loadHandlers($path)
@@ -133,15 +139,15 @@ class Flunky
         $fileManager = new FileManager($path);
 
         $this->handlers = $fileManager->listPhpFiles()
-            ->reject(function($file) {
-                return $file === 'Handler.php';
-            })
-            ->map(function($file) {
-                $file = str_replace('.php', '', $file);
-                $class = "\\Flunky\\Handlers\\$file";
+                                      ->reject(function ($file) {
+                                          return $file === 'Handler.php';
+                                      })
+                                      ->map(function ($file) {
+                                          $file  = str_replace('.php', '', $file);
+                                          $class = "\\Flunky\\Handlers\\$file";
 
-                return $class;
-            })
-            ->toArray();
+                                          return $class;
+                                      })
+                                      ->toArray();
     }
 }

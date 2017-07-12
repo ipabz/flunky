@@ -12,7 +12,7 @@ class File implements FileInterface
     protected $file;
 
     /**
-     * @param string $file 
+     * @param string $file
      */
     public function __construct($file)
     {
@@ -21,7 +21,7 @@ class File implements FileInterface
 
     /**
      * Gets the contents of a file
-     * 
+     *
      * @return string
      */
     public function getContents()
@@ -31,7 +31,7 @@ class File implements FileInterface
 
     /**
      * Absolute file path
-     * 
+     *
      * @return string
      */
     public function path()
@@ -41,7 +41,7 @@ class File implements FileInterface
 
     /**
      * Get the file extension
-     * 
+     *
      * @return  string
      */
     public function extension()

@@ -17,7 +17,7 @@ class Linker extends Handler
     protected $command;
 
     /**
-     * @param string $basePath 
+     * @param string $basePath
      * @param array $folders
      */
     public function __construct($basePath, $config)
@@ -31,16 +31,16 @@ class Linker extends Handler
 
     /**
      * Link directories
-     * 
+     *
      * @return void
      */
     public function run()
     {
-        $this->folders->each(function($folder) {
+        $this->folders->each(function ($folder) {
             $fromLocation = str_replace('~', '/vagrant_data', $folder['map']);
-            $toLocation = $folder['to'];
-            $temp = explode('/', $toLocation);
-            $www = '/var/www/html/' . end($temp);
+            $toLocation   = $folder['to'];
+            $temp         = explode('/', $toLocation);
+            $www          = '/var/www/html/' . end($temp);
 
             $this->command->run("sudo rm -rf $toLocation");
             $this->command->run("sudo rm -rf $www");

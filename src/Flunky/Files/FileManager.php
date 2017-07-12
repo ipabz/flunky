@@ -24,17 +24,17 @@ class FileManager
     }
 
     /**
-     * List files PHP files
-     * 
-     * @param  boolean $recursive
-     * @return Illuminate\Support\Collection
+     * @param bool $recursive
+     *
+     * @return \Illuminate\Support\Collection
      */
-    public function listPhpFiles($recursive=false)
+    public function listPhpFiles($recursive = false)
     {
-        return collect($this->manager->listContents('local://', $recursive))->reject(function($file) {
+        return collect($this->manager->listContents('local://', $recursive))
+            ->reject(function ($file) {
                 return $file['type'] === 'dir' or $file['extension'] !== 'php';
             })
-            ->map(function($file) {
+            ->map(function ($file) {
                 return $file['path'];
             });
     }

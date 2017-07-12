@@ -32,8 +32,9 @@ abstract class Handler
 
     /**
      * Read file
-     * 
-     * @param  string $file 
+     *
+     * @param  string $file
+     *
      * @return string
      */
     public function read($file)
