@@ -139,7 +139,7 @@ class Command
      *
      * @return string
      */
-    protected static function prepareCommand(array $args)
+    protected function prepareCommand(array $args)
     {
         $cmd = [];
 
