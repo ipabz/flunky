@@ -1,4 +1,5 @@
 vendor/
 .php_cs.cache
 .vagrant/
-/Adzbuzz.yaml
+/Flunky.yaml
+.idea
