@@ -7,21 +7,25 @@ use Flunky\Console\Command;
 class Mysql extends Handler
 {
     /**
-     * @var string
-     */
-    protected $basePath;
-
-    /**
      * @var array
      */
     protected $databases;
 
     /**
-     * @param string $basePath
-     * @param array $sites
+     * @var Command
      */
-    public function __construct($basePath, $config)
+    protected $command;
+
+    /**
+     * Mysql constructor.
+     *
+     * @param string $basePath
+     * @param array $config
+     */
+    public function __construct($basePath, array $config)
     {
+        parent::__construct($basePath);
+
         $this->databases = collect($config['databases']);
 
         $this->command = new Command($basePath);
