@@ -14,6 +14,8 @@ abstract class BaseTestCase extends TestCase
      */
     public function __construct()
     {
+        parent::__construct();
+
         $this->basePath = dirname(__DIR__) . '/';
 
         $this->init();
