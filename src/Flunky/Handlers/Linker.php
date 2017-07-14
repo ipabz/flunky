@@ -12,15 +12,17 @@ class Linker extends Handler
     protected $folders;
 
     /**
-     * @var Flunky\Console\Command
+     * @var Command
      */
     protected $command;
 
     /**
+     * Linker constructor.
+     *
      * @param string $basePath
-     * @param array $folders
+     * @param array $config
      */
-    public function __construct($basePath, $config)
+    public function __construct($basePath, array $config)
     {
         parent::__construct($basePath);
 
