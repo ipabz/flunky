@@ -9,7 +9,7 @@ use League\Flysystem\Adapter\Local;
 class FileManager
 {
     /**
-     * @var League\Flysystem\MountManager
+     * @var MountManager
      */
     protected $manager;
 
