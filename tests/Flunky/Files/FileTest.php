@@ -15,7 +15,7 @@ class FileTest extends BaseTestCase
      *
      * @return void
      */
-    public function init()
+    protected function init()
     {
         $this->file = new File($this->path('Flunky.yaml'));
     }

@@ -26,7 +26,7 @@ abstract class BaseTestCase extends TestCase
      *
      * @return void
      */
-    abstract public function init();
+    abstract protected function init();
 
     /**
      * Get base path

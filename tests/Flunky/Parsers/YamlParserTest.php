@@ -15,7 +15,7 @@ class YamlParserTest extends BaseTestCase
      *
      * @return void
      */
-    public function init()
+    protected function init()
     {
         $this->parser = new YamlParser;
     }

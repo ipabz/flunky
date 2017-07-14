@@ -14,7 +14,7 @@ class CommandTest extends BaseTestCase
      *
      * @return void
      */
-    public function init()
+    protected function init()
     {
         $this->command = new Command($this->getBasePath());
     }
@@ -31,11 +31,11 @@ class CommandTest extends BaseTestCase
 
     /**
      * @test
-     * @expectedException Flunky\Exceptions\CommandException
+     * @expectedException \Flunky\Exceptions\CommandException
      */
     public function run_an_invalid_command()
     {
-        $command = $this->command->run('lsa123 -l');
+        $this->command->run('lsa123 -l');
     }
 
     /**
@@ -50,10 +50,10 @@ class CommandTest extends BaseTestCase
 
     /**
      * @test
-     * @expectedException Flunky\Exceptions\CommandException
+     * @expectedException \Flunky\Exceptions\CommandException
      */
     public function run_an_invalid_command_and_extract_output()
     {
-        $output = $this->command->extract('lsaa24234 -l');
+        $this->command->extract('lsaa24234 -l');
     }
 }
