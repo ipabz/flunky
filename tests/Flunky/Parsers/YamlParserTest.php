@@ -40,7 +40,7 @@ class YamlParserTest extends BaseTestCase
     {
         $yamlFile = new File($this->path('phpunit.xml'));
 
-        $result = $this->parser->parse($yamlFile);
+        $this->parser->parse($yamlFile);
     }
 
     /**
