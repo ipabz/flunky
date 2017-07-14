@@ -10,11 +10,10 @@ use Flunky\Parsers\Contracts\ParserInterface;
 class YamlParser implements ParserInterface
 {
     /**
-     * Parses the file specified
+     * @param FileInterface $file
      *
-     * @param  FileInterface $file
-     *
-     * @return array
+     * @return mixed
+     * @throws InvalidFileException
      */
     public function parse(FileInterface $file)
     {
