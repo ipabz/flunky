@@ -3,7 +3,6 @@
 namespace Flunky;
 
 use Flunky\Files\File;
-use Flunky\Files\FileManager;
 use Flunky\Files\Contracts\FileInterface;
 use Flunky\Parsers\Contracts\ParserInterface;
 
@@ -31,7 +30,7 @@ class Flunky
     {
         $configFile = new File($basePath . 'Flunky.yaml');
 
-        $this->autoDiscover($basePath);
+        $this->autoDiscover();
 
         $config = $this->getConfig($configFile, $this->getParser($configFile));
 
@@ -94,12 +93,8 @@ class Flunky
 
     /**
      * Auto discovery of parsers and handlers
-     *
-     * @param  string $path
-     *
-     * @return void
      */
-    protected function autoDiscover($path)
+    protected function autoDiscover()
     {
         $this->loadParsers();
 
