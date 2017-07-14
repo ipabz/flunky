@@ -14,7 +14,7 @@ abstract class Handler
     protected $basePath;
 
     /**
-     * @var League\Flysystem\MountManager
+     * @var MountManager
      */
     protected $manager;
 
