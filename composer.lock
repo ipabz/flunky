@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7380503986af24b62a556c56843e4bb3",
+    "content-hash": "379de020c4bc6b09a0174ae9935da1f1",
     "packages": [
         {
             "name": "league/flysystem",
@@ -146,16 +146,16 @@
         },
         {
             "name": "tightenco/collect",
-            "version": "v5.4.27",
+            "version": "v5.4.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tightenco/collect.git",
-                "reference": "16a16f2214f2ef251e6cbd3efd47b422bace5f58"
+                "reference": "fbe5680b688014a64bf697da1da29515bb5c8cee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tightenco/collect/zipball/16a16f2214f2ef251e6cbd3efd47b422bace5f58",
-                "reference": "16a16f2214f2ef251e6cbd3efd47b422bace5f58",
+                "url": "https://api.github.com/repos/tightenco/collect/zipball/fbe5680b688014a64bf697da1da29515bb5c8cee",
+                "reference": "fbe5680b688014a64bf697da1da29515bb5c8cee",
                 "shasum": ""
             },
             "require": {
@@ -189,7 +189,7 @@
                 "collection",
                 "laravel"
             ],
-            "time": "2017-06-15T20:17:56+00:00"
+            "time": "2017-07-11T17:51:45+00:00"
         }
     ],
     "packages-dev": [
