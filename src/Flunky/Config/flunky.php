@@ -7,6 +7,7 @@ return [
     'Handlers' => [
         "Flunky\\Handlers\\Linker",
         "Flunky\\Handlers\\Mysql",
-        "Flunky\\Handlers\\VirtualHost"
+        "Flunky\\Handlers\\VirtualHost",
+        "Flunky\\Handlers\\Cron"
     ]
 ];

@@ -92,6 +92,12 @@ class Flunky
             s.path = scriptDir + "/setup-mysql-config.sh"
         end
 
+        # Clear crontab
+        config.vm.provision "shell" do |s|
+            s.name = "Clearing crontab..."
+            s.path = scriptDir + "/clear-crontab.sh"
+        end
+
         # Run flunky
         config.vm.provision "shell" do |s|
             s.name = "Running flunky..." 

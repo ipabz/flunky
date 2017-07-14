@@ -9,6 +9,9 @@ folders:
 sites:
     - map: mysite.local
       to: /home/vagrant/Projects/my-site
+      cron:
+        - command: php -v
+          schedule: 1 * * * *
 
 databases:
     - mysite_db
