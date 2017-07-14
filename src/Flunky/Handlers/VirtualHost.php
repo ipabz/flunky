@@ -17,6 +17,11 @@ class VirtualHost extends Handler
     protected $folders;
 
     /**
+     * @var Command
+     */
+    protected $command;
+
+    /**
      * @param string $basePath
      * @param array $config
      */
@@ -95,7 +100,6 @@ class VirtualHost extends Handler
      */
     protected function prepareContent($contents, $map, $to, $folderMappings)
     {
-        $toTemp             = explode('/', $to);
         $folderMappingsTemp = explode('/', $folderMappings);
 
         $path = $folderMappingsTemp[count($folderMappingsTemp) - 1]
