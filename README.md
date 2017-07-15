@@ -85,6 +85,21 @@ Make sure the IP address listed is the one set in your `~/Flunky/Flunky.yaml` fi
 http://my-project.dev
 ```
 
+### Configuring Cron Jobs
+
+Cron jobs can be configured as follows
+
+```
+sites:
+    - map: mysite.local
+      to: /home/vagrant/Projects/my-site
+      cron:
+        - command: php -v
+          schedule: 1 * * * *
+```
+
+You can add as many cron jobs as you want.
+
 ## Launching The Vagrant Box
 
 Once you have edited the `Flunky.yaml` to your liking, run the `vagrant up` command from your `Flunky` directory. Vagrant will boot the virtual machine and automatically configure your shared folders and Apache sites.
